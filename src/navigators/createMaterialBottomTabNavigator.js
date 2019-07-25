@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { BottomNavigation } from 'react-native-paper';
+import { BottomNavigation, withTheme } from 'react-native-paper';
 import { createTabNavigator, type InjectedProps } from 'react-navigation-tabs';
 
 type Props = InjectedProps & {
@@ -38,6 +38,7 @@ class BottomNavigationView extends React.Component<Props> {
       // eslint-disable-next-line no-unused-vars
       descriptors,
       barStyle,
+      theme,
       ...rest
     } = this.props;
 
@@ -54,7 +55,7 @@ class BottomNavigationView extends React.Component<Props> {
         inactiveColor={inactiveTintColor}
         {...rest}
         renderIcon={this._renderIcon}
-        barStyle={[barStyle, extraStyle]}
+        barStyle={[{ backgroundColor: theme.colors.background }, barStyle, extraStyle]}
         navigationState={navigation.state}
         getColor={this._getColor}
       />
@@ -62,4 +63,4 @@ class BottomNavigationView extends React.Component<Props> {
   }
 }
 
-export default createTabNavigator(BottomNavigationView);
+export default createTabNavigator(withTheme(BottomNavigationView));
